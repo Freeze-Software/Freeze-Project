@@ -1,38 +1,60 @@
-AS = gcc
-CC = gcc
-LD = ld
-CFLAGS = -ffreestanding -m32 -Wall -Wextra
-LDFLAGS = -m elf_i386
+# Variables
+export PROJECT_ROOT	:= $(realpath .)
+BUILD_DIR			:= build
+ISO_DIR				:= $(BUILD_DIR)/iso
+ISO_FILE			:= $(ISO_DIR)/freeze.img
+BOOT_BIN			:= $(BUILD_DIR)/boot/boot.bin
+BOOT_ELF			:= $(BUILD_DIR)/boot/boot.elf
+KERNEL_ELF			:= $(BUILD_DIR)/kernel/kernel.elf
+LOADER_BIN			:= $(BUILD_DIR)/kernel/loader.bin
+KERNEL_BIN			:= $(BUILD_DIR)/kernel/kernel.bin
+MOUNT_POINT			:= /mnt
 
-all: freeze.iso
+# Rules
+.PHONY : all clean run debug bootloader kernel
+all : clean $(ISO_FILE) run
 
-start.o: FreezeProject/start.S
-	$(CC) $(CFLAGS) -c FreezeProject/start.S -o start.o
+# Make the final iso file
+$(ISO_FILE): kernel
+	@mkdir -p $(@D)
+	dd if=/dev/zero of=$@ bs=1M count=10
+	mkfs.fat -F 16 $@
+	dd if=$(BOOT_BIN) of=$@ conv=notrunc
 
-kernel.o: FreezeProject/kernel.c
-	$(CC) $(CFLAGS) -c FreezeProject/kernel.c -o kernel.o
+	sudo mount -o loop $@ $(MOUNT_POINT)
+	sudo cp $(LOADER_BIN) $(MOUNT_POINT)
+	sudo cp $(KERNEL_BIN) $(MOUNT_POINT)
+	sudo umount $(MOUNT_POINT)
 
-crt.o: FreezeProject/crt.c
-	$(CC) $(CFLAGS) -c FreezeProject/crt.c -o crt.o
+# Make boot & kernel
+kernel:
+	$(MAKE) -C boot
+	$(MAKE) -C kernel
 
-serial.o: FreezeProject/serial.c
-	$(CC) $(CFLAGS) -c FreezeProject/serial.c -o serial.o
+# Make slibc library
+lib:
+	$(MAKE) -C kernel/libs/slibc
 
-kernel.bin: start.o crt.o serial.o kernel.o FreezeProject/linker.ld
-	$(LD) $(LDFLAGS) -T FreezeProject/linker.ld -o kernel.bin start.o crt.o serial.o kernel.o
+run : 
+	qemu-system-i386 -drive format=raw,file=$(ISO_FILE)
 
-iso/boot/grub/grub.cfg: FreezeProject/grub/grub.cfg
-	mkdir -p iso/boot/grub
-	cp FreezeProject/grub/grub.cfg iso/boot/grub/
-
-freeze.iso: kernel.bin iso/boot/grub/grub.cfg
-	rm -rf iso/boot/kernel.bin
-	mkdir -p iso/boot/grub
-	cp kernel.bin iso/boot/
-	grub-mkrescue -o freeze.iso iso
-
+# Cleanup all build files
 clean:
-	rm -f *.o kernel.bin freeze.iso
-	rm -rf iso
+	rm -rf $(BUILD_DIR)/*
+	clear
 
-.PHONY: all clean
+# Debug section
+debug: clean $(ISO_FILE)
+	qemu-system-i386 -s -S -kernel $(ISO_FILE)
+
+gdb-only:
+	gdb -ex "target remote localhost:1234" -ex "layout asm" -ex "br *0x7c00" -ex "c"
+
+gdb-boot:
+	gdb -ex "file $(BOOT_ELF)" -ex "target remote localhost:1234" -ex "layout asm"
+
+gdb-kernel:
+	gdb -ex "file $(KERNEL_ELF)" -ex "target remote localhost:1234" -ex "layout asm"
+
+run: build/iso/freeze.img
+	qemu-system-i386 -cdrom build/iso/freeze.img -boot d -m 512M
