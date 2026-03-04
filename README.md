@@ -43,11 +43,11 @@ FreezeOS is a clean, designed to be Lightweight, simple, and customizable.
 
 ## Project Status
 
-[![GitHub stars](https://img.shields.io/github/stars/Clashnewbme/freezeos?style=social)](https://github.com/yourusername/freezeos/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Clashnewbme/freezeos?style=social)](https://github.com/Clashnewbme/freezeos/network/members)
-[![Last commit](https://img.shields.io/github/last-commit/Clashnewbme/freezeos)](https://github.com/Clashnewbme/freezeos/commits/main)
-[![Latest release](https://img.shields.io/github/v/release/Clashnewbme/freezeos?style=flat)](https://github.com/Clashnewbme/freezeos/releases/latest)
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![GitHub stars](https://img.shields.io/github/stars/Clashnewbme/Freeze-Project?style=social)](https://github.com/Clashnewbme/Freeze-Project/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Clashnewbme/Freeze-Project?style=social)](https://github.com/Clashnewbme/Freeze-Project/network/members)
+[![Last commit](https://img.shields.io/github/last-commit/Clashnewbme/Freeze-Project)](https://github.com/Clashnewbme/Freeze-Project/commits/main)
+[![Latest release](https://img.shields.io/github/v/release/Clashnewbme/Freeze-Project?style=flat)](https://github.com/Clashnewbme/Freeze-Project/releases/latest)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 ---
 
