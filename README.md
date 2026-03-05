@@ -59,7 +59,7 @@ FreezeOS is open-source under the **GNU General Public License v2.0 (GPL-2.0-onl
 See the `LICENSE` file for full terms.
 
 ---
-
+ 
 <a href="https://api.star-history.com/svg?repos=Clashnewbme/Freeze-Project&type=Date">
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Clashnewbme/Freeze-Project&type=Date&type=Date&theme=dark" />
