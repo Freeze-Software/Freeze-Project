@@ -269,16 +269,18 @@ void handle_command(char *buf){
         print("Shutting down...\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"ls")==1){
         print("boot/  kernel.bin  grub/  README.md\n");
-    } else if(strcmp(buf,"add file")==1){
-        print("Creating new file..\n");
-            print("\033[96m=== \033[95mFile Editor\033[96m ===\033[0m\n");
-            print("\033[92mText file succesfully created\033[0m\n");
-            print("\033[93mUse type to write\033[0m\n\n");
-            print("\033[94m--------------------------------\033[0m\n");
-            print("\033[92mText file typer: \033[93mVersion 0.32\033[0m\n");
-    } else if(strcmp(buf,"type")==1){
+    } else if(strcmp(buf,"open editor")==1){
+        print("Opening editor....\n");
+        print("\033[96m=== \033[95mfile.fp Editor\033[96m ===\033[0m\n");
+        print("\033[92mText file succesfully created\033[0m\n");
+        print("\033[93mUse type to write\033[0m\n\n");
+        print("\033[94m--------------------------------\033[0m\n");
+        print("\033[92mText file typer: \033[93mVersion 0.34\033[0m\n");
+    } else if(strcmp(buf,"edit")==1){
+        print("Opened file.fp\n");
         print("Editing file:\n"); get_input(buf); print(buf); putc('\n');
-    } else if(startswith(buf,"type ")){
+    } else if(startswith(buf,"edit")){
+        print("Updated file:\n");
         print(buf + 5); putc('\n');
     } else if(strcmp(buf,"stat")==1){
         print("File: kernel.bin Size: 2.5\n");
