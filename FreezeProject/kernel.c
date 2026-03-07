@@ -197,19 +197,19 @@ void handle_command(char *buf){
         print("=== SYSTEM ===\n");
         print("uname, date, id, who, ps, top, lsmod, dmesg, systemctl, shutdown\n");
         print("=== TEXT ===\n");
-        print("cat, echo, grep, sed, awk, wc, head, tail, more, less\n");
+        print("echo, grep, sed, awk, wc, head, tail, more, less\n");
         print("=== FILE ===\n");
         print("ls, pwd, file, stat, chmod, chown, ln, mount, umount, df, du\n");
         print("=== PROCESS ===\n");
-        print("kill, bg, fg, jobs, wait, exit, sleep\n");
+        print("kill, fg, jobs, wait, exit, sleep\n");
         print("=== USER ===\n");
         print("useradd, userdel, passwd, groups, sudo\n");
         print("=== NETWORK ===\n");
-        print("ifconfig, ping, ssh, scp, netstat, curl, wget\n");
+        print("ifconfig, netstat, curl, wget\n");
         print("=== DEV ===\n");
-        print("gcc, make, git, bash, sh, man, which, whereis\n");
+        print(" make, bash, sh, man, which, whereis\n");
         print("=== OTHER ===\n");
-        print("clear, about, version, info, test, reboot, true, false\n");
+        print("clear, about, version, info, test, reboot, hl\n");
     } else if(strcmp(buf,"clear")==1){
         clear();
     } else if(strcmp(buf,"-r")==1){
@@ -229,7 +229,7 @@ void handle_command(char *buf){
 
         read_rtc(&sec,&min,&hour,&day,&mon,&year);
 
-    // basic validation (prevents crashes if RTC gives bad values)
+    // CMOS validation
         if(mon < 1 || mon > 12){
             print("RTC error\n");
             return;
@@ -286,10 +286,6 @@ void handle_command(char *buf){
         print("Unmounting filesystem...\n");
     } else if(strcmp(buf,"df")==1){
         print("Filesystem Size Used Avail %%Use Mounted on\n/dev/sda1 10G  2G   8G   20%  /\n");
-    } else if(strcmp(buf,"du")==1){
-        print("4.1M  .\n");
-    } else if(strcmp(buf,"cat")==1){
-        print("Usage: cat <file>\n");
     } else if(startswith(buf,"cat ")){
         print("Cannot read file: no filesystem\n");
     } else if(strcmp(buf,"echo")==1){
@@ -380,16 +376,8 @@ void handle_command(char *buf){
         print("\033[0m\n"); 
     } else if(strcmp(buf,"passwd")==1){
         print("Changing password...\n");
-    } else if(strcmp(buf,"groups")==1){
-        print("root adm sudo\n");
     } else if(strcmp(buf,"ifconfig")==1){
         print("lo: unknown netmask unknown\neth0: unknown netmask unknown\n");
-    } else if(strcmp(buf,"ping")==1){
-        print("ping: ICMP echo request not implemented\n");
-    } else if(strcmp(buf,"ssh")==1){
-        print("Usage: ssh <host>\n");
-    } else if(strcmp(buf,"scp")==1){
-        print("Usage: scp <file> <host>:<path>\n");
     } else if(strcmp(buf,"netstat")==1){
         print("No Internet connections\nProto Local Address Foreign Address State\n");
     } else if(strcmp(buf,"curl")==1 || strcmp(buf,"wget")==1){
@@ -400,12 +388,8 @@ void handle_command(char *buf){
         print("\033[93mDeveloped by @Clashnewbme, @Crystal_Nitr0, and others.\033[0m\n\n");
         print("\033[94m--------------------------------\033[0m\n");
         print("\033[92mCurrently: \033[93mVersion 0.60\033[0m\n");
-    } else if(strcmp(buf,"gcc")==1){
-        print("gcc (Freeze Project 0.50)\n");
     } else if(strcmp(buf,"make")==1){
         print("GNU Make 4.3\n");
-    } else if(strcmp(buf,"git")==1){
-        print("git version 2.34.1\n");
     } else if(strcmp(buf,"bash")==1){
         print("GNU bash, version 5.1.0\n");
     } else if(strcmp(buf,"sh")==1){
