@@ -13,6 +13,8 @@ FreezeOS is a clean, designed to be Lightweight, simple, and customizable.
 - Easy to use
 - Open-source
 
+<img width="314" height="277" alt="Image" src="https://github.com/user-attachments/assets/09715275-117b-4ca8-944a-b272f2e762ce" />
+
 ---
 
 ## Official Links
