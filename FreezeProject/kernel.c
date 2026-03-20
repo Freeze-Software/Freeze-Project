@@ -526,9 +526,10 @@ void handle_command(char *buf){
 
         print("Opening FreezeProject/applications/library.fp\n");
         print("        \n");
-        print("\033[95m=== DIGITAL LIBRARY ===\033[0m\n");
+        print("\033[95m=== GUTENBERG LIBRARY ===\033[0m\n");
         print("Choose a book (1)\n");
-        print("(theres only 1 (Frankenstein))\n");
+        print("Books:\n");
+        print("1: Frankenstein\n");
 
         int running = 1;
 
