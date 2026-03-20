@@ -28,7 +28,10 @@ FreezeOS is a clean, designed to be Lightweight, simple, and customizable.
 ## Documentation
 
 - [Full Documentation](https://freezeos.org/documentation.html)  
-- [Latest Release](https://freezeos.org/version0615.html)  
+- [Latest Release](https://freezeos.org/version0615.html)
+
+Flow charts:
+<img width="1703" height="954" alt="Image" src="https://github.com/user-attachments/assets/d1ffdfa1-c304-4aff-8775-508d45b079b1" />
 
 ---
 
