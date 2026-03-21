@@ -9,4 +9,6 @@ void putc(char c);
 void print(const char* s);
 void clear();
 void erase_last_char();
+void print_int(int v);
+void print_hex(unsigned int v);
 #endif
