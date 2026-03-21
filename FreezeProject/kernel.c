@@ -7,6 +7,7 @@ const unsigned int multiboot_header[] = {
 
 #include "memory.h"
 #include "timer.h"
+#include "input.h"
 #include <stdint.h>
 
 
@@ -16,7 +17,7 @@ extern void serial_print(const char* s);
 extern int serial_available(void);
 extern char serial_getc(void);
 
-/* reset outb */
+/* reset srut */
 static inline void outb(unsigned short port, unsigned char val){
     __asm__ volatile ("outb %0, %1" : : "a"(val), "Nd"(port));
 }
