@@ -432,10 +432,12 @@ void handle_command(char *buf){
         print("11111111 00000000 00000000 11111111 10101010 01010101 01010101 10101010 11001100 00110011 00110011 11001100 11110000 00001111 00001111 11110000 01111110 10000001\n");
         print("\033[0m");
         print("        \n");
-        print("\033[95m=== GUTENBERG LIBRARY ===\033[0m\n");
+        print("\033[95m=== FREEZE PROJECT LIBRARY ===\033[0m\n");
         print("Choose a book (1)\n");
         print("Books:\n");
         print("1: Frankenstein\n");
+        print("2: All Good Things Have to End Sometime\n");
+        print("3: Winter’s Whisper.\n");
 
         int running = 1;
 
@@ -638,6 +640,33 @@ void handle_command(char *buf){
                 print("He becomes especially interested in their situation and hopes to eventually reveal himself.\n");
                 print("He begins to form a plan to approach them, believing they may accept him.\n");
                 print("Despite his hopes, he still struggles with his appearance and fear of rejection.\n");
+            }
+
+            // hey reminder to contributors for this story, we are using the https://reedsy.com/short-story/l2t862/ story, please do not use or add copyrighted material.
+            if(strcmp(buf,"2")==1){
+                print("\033[93mAll Good Things Have to End Sometime\033[0m\n");
+
+                print("By Nicholas LeRouge\n");
+                print("Santa Claus’s announcement was greeted with stunned silence.\n");
+                print("“All good things have to end sometime,” he said. “I’m old, I’m tired. I can’t go on for ever.” Then he chuckled, “Although it already feels like I’ve been doing this for ever.”\n");
+                print("“But you can’t stop! No!!” some children said. Others were in tears.\n");
+                print("“Sorry, kids, I’m done. It’s incredibly exhausting to be responsible for delivering all your gifts on the one day.”\n");
+                print("“But… who’ll do your job instead?”\n");
+                print("“You’ll find someone else. They’ll do things their way, differently, but just as well.”\n");
+                print("​Then, with a final goodbye, he faded out.\n");
+                
+            }
+// This story has absolutly no license, you may use or do anything you want with it ig.
+            if(strcmp(buf,"3")==1){
+                print("\033[41mWinter’s Whisper.\033[0m\n");
+
+                print("By Edward James\n");
+                print("Snowflakes drifted quietly through the night,\n");
+                print("each one unique, tracing delicate patterns in the cold air.\n");
+                print("A child reached out, catching a fleeting crystal,\n");
+                print("watching it melt into nothing.\n");
+                print("In that moment, she learned beauty can be brief\n");
+                print("but its memory lingers like winter’s whisper long after it disappears softly.\n");
             }
 
             else if(strcmp(buf,"exit")==1){
