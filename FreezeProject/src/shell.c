@@ -65,7 +65,7 @@ void handle_command(char *buf){
         print("Forking while forking...\n");
         print("Forking while forking...\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"version")==1){
-        print("Freeze Project 0.5\n");
+        print("Freeze Project 0.64\n");
     } else if(strcmp(buf,"date")==1){
         int sec,min,hour,day,mon,year;
 
@@ -142,7 +142,7 @@ void handle_command(char *buf){
         print("\033[92mText file succesfully created\033[0m\n");
         print("\033[93mUse type to write\033[0m\n\n");
         print("\033[94m--------------------------------\033[0m\n");
-        print("\033[92mText file typer: \033[93mVersion 0.34\033[0m\n");
+        print("\033[92mText file typer: \033[93mVersion 0.35\033[0m\n");
     } else if(strcmp(buf,"edit")==1){
         print("Opened file.fp\n");
         print("Editing file:\n"); get_input(buf); print(buf); putc('\n');
@@ -749,7 +749,7 @@ void handle_command(char *buf){
         print("\033[92mhttps://freezeos.org/\033[0m\n");
         print("\033[93mDeveloped by @Clashnewbme, @Crystal_Nitr0, and others.\033[0m\n\n");
         print("\033[94m--------------------------------\033[0m\n");
-        print("\033[92mCurrently: \033[93mVersion 0.62\033[0m\n");
+        print("\033[92mCurrently: \033[93mVersion 0.64\033[0m\n");
     } else if(strcmp(buf,"sh")==1){
         print("POSIX shell\n");
     } else if(strcmp(buf, "freezefetch") == 1){
@@ -759,7 +759,7 @@ void handle_command(char *buf){
         print("     ███████████████████     ------------\n");
         print("   ███████████████████████   OS: FreezeOS\n");
         print("  █████████████████████████  Kernel: x86\n");
-        print(" ████████  ███████  ████████ Version 0.62\n");
+        print(" ████████  ███████  ████████ Version 0.64\n");
         print(" ███████    █████    ███████ \n");
         print(" ███████   ██   ██   ███████ \n");
         print("  ███████   \\___/   ███████ \n");
@@ -786,7 +786,7 @@ void handle_command(char *buf){
     } else if(strcmp(buf,"false")==1){
         print("\n");
     } else if(strcmp(buf,"info")==1 || strcmp(buf,"kernel")==1 || strcmp(buf,"test")==1){
-        print("Freeze OS v0.61\n");
+        print("Freeze OS v0.64\n");
         print("Created by Clashnewbme and Crystal_Nitr0\n");
      } else if(strcmp(buf,"FreezeOS")==1 || strcmp(buf,"freezeos")==1 || strcmp(buf,"Freeze")==1 || strcmp(buf,"freeze")==1){
          print("Freeze\n");
