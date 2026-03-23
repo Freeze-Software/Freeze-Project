@@ -1,29 +1,39 @@
-#!/bin/bash
-set -e
+CC = aarch64-none-elf-gcc
+LD = aarch64-none-elf-ld
+OBJCOPY = aarch64-none-elf-objcopy
 
-PI_ENV="raspberry-pi"
-BUILD_DIR=$(pwd)
-ISO_OUTPUT="$BUILD_DIR/freeze.iso"
-ARM_TOOLCHAIN="/usr/local/gcc-arm/"
+P = FreezeProject
+BUILDDIR = $(P)/build
+SRCDIR = $(P)/src
 
-if [ "$(uname -m)" == "armv7l" ] || [ "$(uname -m)" == "aarch64" ]; then
-    echo "Running on Raspberry Pi. Starting the build process locally..."
-else
-    echo "Cross-compiling for Raspberry Pi. Ensure you have the correct toolchain installed."
-    export PATH="$ARM_TOOLCHAIN/bin:$PATH"
-fi
+CFLAGS = -ffreestanding -nostdlib -nostartfiles -Wall -Wextra -I$(P)/include
+LDFLAGS = -T $(SRCDIR)/linker.ld
 
-echo "Building FreezeOS for Raspberry Pi..."
+C_SOURCES = $(wildcard $(SRCDIR)/*.c)
+ASM_SOURCES = $(wildcard $(SRCDIR)/*.S)
 
-cd "$(dirname "$0")"
+C_OBJECTS = $(patsubst $(SRCDIR)/%.c,$(BUILDDIR)/%.o,$(C_SOURCES))
+ASM_OBJECTS = $(patsubst $(SRCDIR)/%.S,$(BUILDDIR)/%.o,$(ASM_SOURCES))
 
-echo "Cleaning previous build..."
-make clean
+OBJECTS = $(C_OBJECTS) $(ASM_OBJECTS)
 
-echo "Compiling for Raspberry Pi..."
-make
+KERNEL = kernel8.img
 
-echo "Creating .iso image..."
+all: $(KERNEL)
 
-echo "$ISO_OUTPUT"
-echo "Build complete."
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c
+	mkdir -p $(BUILDDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.S
+	mkdir -p $(BUILDDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(KERNEL): $(OBJECTS)
+	$(LD) $(LDFLAGS) -o $(BUILDDIR)/kernel.elf $(OBJECTS)
+	$(OBJCOPY) $(BUILDDIR)/kernel.elf -O binary $(KERNEL)
+
+clean:
+	rm -rf $(BUILDDIR) *.img *.elf
+
+.PHONY: all clean
