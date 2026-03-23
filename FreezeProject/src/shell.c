@@ -799,6 +799,127 @@ void handle_command(char *buf){
         print("Restarting System\n"); outb(0x64,0xFE); for(;;);
     } else if(strcmp(buf,"reboot")==1){
         print("Rebooting...\n"); outb(0x64,0xFE); for(;;);
+    } else if(strcmp(buf, ":).sss") == 1){
+
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+        print("loading shell file...\n\n");
+        print("loading shell file..\n\n");
+        print("loading shell file.\n\n");
+
+        // FRAME 1
+        print("   o   \n");
+        print("  /|\\ \n");
+        print("  / \\ \n");
+
+        // FRAME 2
+        print("   o   \n");
+        print("  /|\\ \n");
+        print("   |   \n");
+        print("  / \\ \n");
+
+        // FRAME 3
+        print("   o   \n");
+        print("  /|\\ \n");
+        print("  /     \n");
+        print("   \\   \n");
+
+        // FRAME 4
+        print("   o   \n");
+        print("  /|\\ \n");
+        print("    \\  \n");
+        print("   /   \n");
+
+        // FRAME 5
+        print("   o   \n");
+        print("  /|\\ \n");
+        print("  / \\ \n");
+
+        // MOVE RIGHT
+        print("\n\n\n\n\n");
+
+        print("      o   \n");
+        print("     /|\\ \n");
+        print("     / \\ \n");
+
+
+        print("         o   \n");
+        print("        /|\\ \n");
+        print("        / \\ \n");
+
+        print("            o   \n");
+        print("           /|\\ \n");
+        print("           / \\ \n");
+
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+        print("\033[31m   ██  \n");
+        print("██  ██  \n");
+        print("    ██  \n");
+        print("    ██  \n");
+        print("██  ██  \n");
+        print("   ██   \033[0m\n");
+        
+        print("\n:)\n");
+
     } else {
         print("Command not found.\n");
     }
