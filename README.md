@@ -1,6 +1,6 @@
 # Freeze Project
 
-> A simple, easy to set up operating system
+> Operating System from scratch
 
 Created by Clashnewbme, and volunteers.
                       
