@@ -3,6 +3,7 @@
 > A simple, easy to set up operating system
 
 Created by Clashnewbme, and volunteers.
+<img width="366" height="464" alt="Screenshot 2026-03-23 at 3 29 54 PM" src="https://github.com/user-attachments/assets/3dfc586f-c7c7-47b7-85f7-7d0982b108d9" />
 
 ---
 
