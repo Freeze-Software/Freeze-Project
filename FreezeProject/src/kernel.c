@@ -155,6 +155,18 @@ void pci_scan() {
             print_hex(slot);
             print("\n");
 
+            uint32_t classData = pci_read(bus, slot, 0, 0x08);
+            uint8_t classCode = (classData >> 24) & 0xFF;
+            uint8_t subclass  = (classData >> 16) & 0xFF;
+
+            if (classCode == 0x02) {
+                print("[NET] network device detected at ");
+                print_hex(bus);
+                print(":");
+                print_hex(slot);
+                print("\n");
+            }
+
             if (vendor == 0x8086 && device == 0x100E) {
                 print("[NET] Found e1000!\n");
                 e1000_bus = bus;
@@ -185,8 +197,6 @@ void kernel_main(void){
     print("\033[93mType 'help' for help on learning commands\033[0m\n\n");
     print("\033[94m--------------------------------\033[0m\n");
     print("\033[92mCurrently: \033[93mVersion 0.64\033[0m\n");
-
-
 
     shell();      
 }
