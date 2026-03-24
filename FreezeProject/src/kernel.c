@@ -15,7 +15,6 @@ const unsigned int multiboot_header[] = {
 
 void print_hex(uint32_t val);
 
-
 static inline void outl(uint16_t port, uint32_t val) {
     __asm__ volatile ("outl %0, %1" : : "a"(val), "Nd"(port));
 }
@@ -26,7 +25,6 @@ static inline uint32_t inl(uint16_t port) {
     return ret;
 }
 
-
 uint32_t pci_read(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset) {
     uint32_t address = (uint32_t)((bus << 16) | (slot << 11) |
                                  (func << 8) | (offset & 0xFC) |
@@ -36,6 +34,9 @@ uint32_t pci_read(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset) {
     return inl(0xCFC);
 }
 
+/* Store e1000 location */
+uint8_t e1000_bus = 0xFF;
+uint8_t e1000_slot = 0xFF;
 
 void pci_scan() {
     print("\n[PCI] Scanning...\n");
@@ -55,16 +56,29 @@ void pci_scan() {
             print_hex(vendor);
             print(":");
             print_hex(device);
+            print(" @ ");
+            print_hex(bus);
+            print(":");
+            print_hex(slot);
             print("\n");
 
             if (vendor == 0x8086 && device == 0x100E) {
-                print("\n[NET] Found e1000!\n");
-                return;
+                print("[NET] Found e1000!\n");
+                e1000_bus = bus;
+                e1000_slot = slot;
             }
         }
     }
 
-    print("\n[NET] No e1000 found.\n");
+    if (e1000_bus == 0xFF) {
+        print("\n[NET] No e1000 found.\n");
+    } else {
+        print("\n[NET] e1000 ready at ");
+        print_hex(e1000_bus);
+        print(":");
+        print_hex(e1000_slot);
+        print("\n");
+    }
 }
 // Entry
 void kernel_main(void){
