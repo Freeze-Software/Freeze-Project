@@ -1,4 +1,4 @@
-# codespace guide
+<img width="512" height="308" alt="freezelogo" src="https://github.com/user-attachments/assets/4a98902f-2bc1-4cbb-b313-8a92d6b22fee" />
 
 This will guide explains how to build and run the Freeze OS project using **QEMU**.
 
