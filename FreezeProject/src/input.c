@@ -20,13 +20,13 @@ char scancode_to_ascii(unsigned char sc) {
         'j', 'k', 'l', ';', '\'', '`', 0,   '\\', 'z', 'x', 'c', 'v',
         'b', 'n', 'm', ',', '.',  '/', 0,   '*',  0,   ' '
     };
+
     if (sc < sizeof(map)) return map[sc];
     return 0;
 }
 
 void get_input(char* buffer) {
     int i = 0;
-    static unsigned char last_sc = 0;
 
     while (1) {
         if (serial_available()) {
@@ -55,14 +55,12 @@ void get_input(char* buffer) {
 
             continue;
         }
+
         if (!(inb(0x64) & 1)) continue; 
 
         unsigned char sc = inb(0x60);
 
         if (sc & 0x80) continue; 
-
-        if (sc == last_sc) continue; 
-        last_sc = sc;
 
         char c = scancode_to_ascii(sc);
         if (!c) continue;
