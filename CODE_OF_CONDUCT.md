@@ -1,5 +1,6 @@
 # Contributor Covenant Code of Conduct
 <img width="512" height="308" alt="freezelogo" src="https://github.com/user-attachments/assets/4a98902f-2bc1-4cbb-b313-8a92d6b22fee" />
+      
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our
