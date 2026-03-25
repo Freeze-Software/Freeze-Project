@@ -1,10 +1,9 @@
-# Freeze Project
+<img width="612" height="408" alt="freezelogo" src="https://github.com/user-attachments/assets/4a98902f-2bc1-4cbb-b313-8a92d6b22fee" />
 
 > Operating System from scratch
 
 Created by Clashnewbme, and volunteers.
-                      
-<img width="366" height="464" alt="Screenshot 2026-03-23 at 3 29 54 PM" src="https://github.com/user-attachments/assets/3dfc586f-c7c7-47b7-85f7-7d0982b108d9" />
+
 
 ---
 
@@ -34,14 +33,15 @@ Created by Clashnewbme, and volunteers.
 
 - [Full Documentation](https://freezeos.org/documentation.html)  
 - [Latest Release](https://freezeos.org/version062.html)
-- [Setup on codespace]([https://freezeos.org/version062.html](https://github.com/Clashnewbme/Freeze-Project/blob/main/codespaces.md))
+      
+<img width="366" height="464" alt="Screenshot 2026-03-23 at 3 29 54 PM" src="https://github.com/user-attachments/assets/3dfc586f-c7c7-47b7-85f7-7d0982b108d9" />
 
 ---
 
-## To make files
+## To make in qemu
 
 ```bash
-make && make run
+make
 ```
 
 ---
