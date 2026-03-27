@@ -41,21 +41,15 @@ void shell() {
 // commands
 void handle_command(char* buf) {
     if (strcmp(buf, "help") == 1) {
-        print("=== SYSTEM ===\n");
+        print("Built in commands:\n");
         print(
             "uname, date, id, who, ps, top, lsmod, systemctl, shutdown, "
             "apps\n");
-        print("=== TEXT ===\n");
         print("echo, sed, awk, wc, head\n");
-        print("=== FILE ===\n");
         print("ls, pwd, file, stat, chown, ln, du\n");
-        print("=== PROCESS ===\n");
-        print("kill, wait, exit, sleep\n");
-        print("=== USER ===\n");
+        print("kill, exit, sleep\n");
         print("useradd, groups, sudo\n");
-        print("=== DEV ===\n");
         print(" make, bash, sh, man, which, whereis\n");
-        print("=== OTHER ===\n");
         print("clear, about, version, info, test, reboot, hl\n");
     } else if (strcmp(buf, "clear") == 1) {
         clear();
