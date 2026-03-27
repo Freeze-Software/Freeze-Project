@@ -3,6 +3,7 @@
 #include "input.h"
 #include "rtc.h"
 #include "vga.h"
+#include "fs.h"
 int startswith(const char* s, const char* p) {
     int i = 0;
     while (p[i]) {
@@ -150,7 +151,7 @@ void handle_command(char* buf) {
         outb(0x64, 0xFE);
         for (;;);
     } else if (strcmp(buf, "ls") == 1) {
-        print("boot/  kernel.bin  grub/  README.md\n");
+        fs_list();
     } else if (strcmp(buf, "open editor") == 1) {
         print("Opening editor....\n");
         print("\033[96m=== \033[95mfile.fp Editor\033[96m ===\033[0m\n");
@@ -158,16 +159,23 @@ void handle_command(char* buf) {
         print("\033[93mUse type to write\033[0m\n\n");
         print("\033[94m--------------------------------\033[0m\n");
         print("\033[92mText file typer: \033[93mVersion 0.35\033[0m\n");
-    } else if (strcmp(buf, "edit") == 1) {
-        print("Opened file.fp\n");
-        print("Editing file:\n");
+    } else if (startswith(buf, "edit ")) {
+        char* filename = buf + 5;
+        int fd = fs_find(filename);
+        if (fd < 0) {
+            fd = fs_create(filename);
+            if (fd < 0) {
+                print("Cannot create file\n");
+            }
+        }
+        print("Editing ");
+        print(filename);
+        print(":\n");
         get_input(buf);
-        print(buf);
-        putc('\n');
-    } else if (startswith(buf, "edit")) {
-        print("Updated file:\n");
-        print(buf + 5);
-        putc('\n');
+        int len = 0;
+        while (buf[len]) len++;
+        fs_write(fd, buf, len);
+        print("Saved\n");
     } else if (strcmp(buf, "stat") == 1) {
         print("File: kernel.bin Size: 2.5\n");
     } else if (strcmp(buf, "chown") == 1) {
@@ -175,7 +183,17 @@ void handle_command(char* buf) {
     } else if (strcmp(buf, "ln") == 1) {
         print("Creating symlink...\n");
     } else if (startswith(buf, "cat ")) {
-        print("Folders: Textfiles, FreezeProject, grub, iso, memory, \n");
+        char* filename = buf + 4;
+        int fd = fs_find(filename);
+        if (fd >= 0) {
+            char buffer[MAX_FILE_SIZE + 1];
+            int read = fs_read(fd, buffer, MAX_FILE_SIZE);
+            buffer[read] = 0;
+            print(buffer);
+            print("\n");
+        } else {
+            print("File not found\n");
+        }
     } else if (strcmp(buf, "echo") == 1) {
         print("Type something:\n");
         get_input(buf);
