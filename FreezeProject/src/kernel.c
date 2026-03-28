@@ -11,6 +11,7 @@ const unsigned int multiboot_header[] = {
 #include "vga.h"
 #include "rtc.h"
 #include "shell.h"
+#include "fs.h"
 #include <stdint.h>
 
 static inline void outl(uint16_t port, uint32_t val) {
@@ -221,7 +222,9 @@ void pci_scan() {
 void kernel_main(void){
     clear();
 
-    pci_scan();   
+    pci_scan();
+
+    fs_init();
 
     print("___________                                    \n");
     print("\\_   _____/______   ____   ____ ________ ____  \n");
