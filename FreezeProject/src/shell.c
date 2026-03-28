@@ -53,7 +53,6 @@ void handle_command(char* buf) {
         print("useradd, groups, sudo\n");
         print(" make, bash, sh, man, which, whereis\n");
         print("clear, about, version, info, test, reboot, hl\n");
-        print("\nFile System Commands (Persistent):\n");
         print("edit <name>, cat <name>, rm <name>, save <name>, fsync\n");
     } else if (strcmp(buf, "clear") == 1) {
         clear();
