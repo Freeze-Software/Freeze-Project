@@ -4,6 +4,7 @@
 #include "rtc.h"
 #include "vga.h"
 #include "fs.h"
+#include "disk.h"
 int startswith(const char* s, const char* p) {
     int i = 0;
     while (p[i]) {
@@ -52,6 +53,8 @@ void handle_command(char* buf) {
         print("useradd, groups, sudo\n");
         print(" make, bash, sh, man, which, whereis\n");
         print("clear, about, version, info, test, reboot, hl\n");
+        print("\nFile System Commands (Persistent):\n");
+        print("edit <name>, cat <name>, rm <name>, save <name>, fsync\n");
     } else if (strcmp(buf, "clear") == 1) {
         clear();
     } else if (strcmp(buf, "-r") == 1) {
@@ -147,6 +150,7 @@ void handle_command(char* buf) {
     } else if (strcmp(buf, "systemctl") == 1) {
         print("Usage: systemctl [start|stop|status|restart] <service>\n");
     } else if (strcmp(buf, "shutdown") == 1) {
+        fs_sync();
         print("Shutting down...\n");
         outb(0x64, 0xFE);
         for (;;);
@@ -175,13 +179,37 @@ void handle_command(char* buf) {
         int len = 0;
         while (buf[len]) len++;
         fs_write(fd, buf, len);
-        print("Saved\n");
+        fs_sync();
+        print("Saved to disk\n");
     } else if (strcmp(buf, "stat") == 1) {
         print("File: kernel.bin Size: 2.5\n");
     } else if (strcmp(buf, "chown") == 1) {
         print("File owner changed\n");
     } else if (strcmp(buf, "ln") == 1) {
         print("Creating symlink...\n");
+    } else if (strcmp(buf, "fsync") == 1) {
+        fs_sync();
+        print("File system synced to disk\n");
+    } else if (startswith(buf, "rm ")) {
+        char* filename = buf + 3;
+        if (fs_delete(filename) == 0) {
+            print("File deleted: ");
+            print(filename);
+            print("\n");
+        } else {
+            print("Cannot delete file\n");
+        }
+    } else if (startswith(buf, "save ")) {
+        char* filename = buf + 5;
+        int fd = fs_find(filename);
+        if (fd >= 0) {
+            fs_save(fd);
+            print("File saved to disk: ");
+            print(filename);
+            print("\n");
+        } else {
+            print("File not found\n");
+        }
     } else if (startswith(buf, "cat ")) {
         char* filename = buf + 4;
         int fd = fs_find(filename);

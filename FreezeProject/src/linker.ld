@@ -19,7 +19,6 @@ SECTIONS {
         *(.data*)
     }
 
-    /* mark start of BSS */
     __bss_start = .;
     .bss : {
         *(.bss*)

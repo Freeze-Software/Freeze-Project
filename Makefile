@@ -44,9 +44,15 @@ freeze.iso: $(BUILDDIR)/kernel.bin iso/boot/grub/grub.cfg
 	cp $(BUILDDIR)/kernel.bin iso/boot/
 	grub-mkrescue -o $@ iso
 
+# disk image for persistent file system
+freeze.img:
+	@if [ ! -f freeze.img ]; then \
+		dd if=/dev/zero of=freeze.img bs=1M count=10 2>/dev/null || true; \
+	fi
+
 # QEMU
-run: freeze.iso
-	qemu-system-i386 -cdrom freeze.iso -nographic
+run: freeze.iso freeze.img
+	qemu-system-i386 -cdrom freeze.iso -drive file=freeze.img,format=raw,media=disk -nographic
 
 # clean
 clean:

@@ -12,6 +12,7 @@ const unsigned int multiboot_header[] = {
 #include "rtc.h"
 #include "shell.h"
 #include "fs.h"
+#include "disk.h"
 #include <stdint.h>
 
 static inline void outl(uint16_t port, uint32_t val) {
@@ -224,7 +225,9 @@ void kernel_main(void){
 
     pci_scan();
 
+    disk_init();
     fs_init();
+    fs_mount();
 
     print("___________                                    \n");
     print("\\_   _____/______   ____   ____ ________ ____  \n");
